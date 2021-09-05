@@ -1,48 +1,74 @@
 # README
+
 # テーブル設計
 
 ## users テーブル
 
-| Column     | Type   | Option      |
-| ---------- | ------ | ----------- |
-| name       | string | null: false |
-| email      | string | null: false |
-| password   | string | null: false |
-| profile    | text   | null: false |
-| occupation | text   | null: false |
-| position   | text   | null: false |
+| Column          | Type   | Option      |
+| --------------- | ------ | ----------- |
+| nickname        | string | null: false |
+| email           | string | null: false |
+| password        | string | null: false |
+| last_name       | string | null: false |
+| first_name      | string | null: false |
+| last_name_kana  | string | null: false |
+| first_name_kana | string | null: false |
+| birthday        | date   | null: false |
+
 
 ### Association
 
-- has_many :prototypes
-- has_many :comments
+- has_many :items
+- has_many :purchases
 
-## prototypes テーブル
-
-| Column     | Type       | Option                         |
-| ---------- | ---------- | ------------------------------ |
-| title      | string     | null: false                    |
-| catch-copy | text       | null: false                    |
-| concept    | text       | null: false                    |
-| user       | references | null: false, foreign_key: true | 
-
-### Association
-
-- has_many :comments
-- belongs_to :user
-
-## comments テーブル
-
-| Column     | Type       | Option                         |
-| ---------- | ---------- | ------------------------------ |
-| text       | text       | null: false                    |
-| user       | references | null: false, foreign_key: true | 
-| prototype  | references | null: false, foreign_key: true |
+## items テーブル
+ 
+| Column              | Type       | Option                         |
+| ------------------- | -----------| ------------------------------ |
+| item_name           | string     | null: false                    |
+| information         | text       | null: false                    |
+| category            | string     | null: false                    |
+| sales_status        | string     | null: false                    |
+| shipping_cost       | string     | null: false                    |
+| shipping_prefecture | string     | null: false                    |
+| shipping_days       | string     | null: false                    |
+| price               | string     | null: false                    |
+| user                | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :prototype
+- has_one :buyer
+
+## buyers テーブル
+
+| Column     | Type       | Option                         |
+| ---------- | ---------- | ------------------------------ |
+| user       | references | null: false, foreign_key: true | 
+| item       | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one :address
+
+## addresses テーブル
+
+| Column      | Type       | Option                         |
+| ----------- | ---------- | ------------------------------ |
+| postal_code | string     | null: false                    |
+| prefecture  | string     | null: false                    |
+| city        | string     | null: false                    |
+| address     | string     | null: false                    |
+| building    | string     |                                |
+| telephone   | string     | null: false                    |
+| buyer       | references | null: false, foreign_key: true | 
+
+### Association
+
+- belongs_to :buyer
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
