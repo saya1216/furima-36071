@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   validates :shipping_cost_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
   validates :prefecture_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
   validates :shipping_days_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :price_id, presence: true
+  validates :price, presence: true
 
   belongs_to :user
   belongs_to :category
