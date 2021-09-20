@@ -2,14 +2,14 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   validates :image, presence: true
-  validates :item_name, presence: true
-  validates :information, presence: true
-  validates :category_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :sales_status_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :shipping_cost_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :prefecture_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :shipping_days_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :price, presence: true
+  validates :item_name, presence: true, length: { maximum: 40 }
+  validates :information, presence: true, length: { maximum: 1_000 }
+  validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :sales_status_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :shipping_cost_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :shipping_days_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :price, presence: true, format: { with: /\A[0-9]+\z/ }, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999}
 
   belongs_to :user
   belongs_to :category
