@@ -19,4 +19,5 @@ class Item < ApplicationRecord
   belongs_to :shipping_cost
   belongs_to :shipping_days
   has_one_attached :image
+  has_one :order
 end
