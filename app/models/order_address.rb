@@ -9,7 +9,10 @@ class OrderAddress
     validates :city
     validates :house_number
     validates :telephone, numericality: true, format: {with: /\A0\d{9,10}\z/}
-    validates :order_id
   end
   validates :prefecture, numericality: {other_than: 1, message: "can't be blank"}
+
+  def save
+    order = Order.create(user_id: user_id, item_id: item_id)
+    Address.create(postal_code: postal_code, prefecture: prefecture, city: city, house_number: house_number, telephone: telephone, order_id: order_id)
 end
