@@ -9,7 +9,7 @@ function post (){
     const profitNumber = document.getElementById("profit");
     const valueResult = inputValue * 0.1;
     profitNumber.innerHTML = (Math.floor(inputValue - valueResult));
-  })
+  });
 };
 
 window.addEventListener('load', post);
