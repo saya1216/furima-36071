@@ -55,6 +55,17 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Telephone is invalid')
       end
+      it 'telephoneが9桁以下だと保存できない' do
+        @order_address.telephone = '090123456'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Telephone is invalid')
+      end
+      it 'telephoneが12桁以下だと保存できない' do
+        @order_address.telephone = '090123456789'
+        @order_address.valid?
+        binding.pry
+        expect(@order_address.errors.full_messages).to include('Telephone is invalid')
+      end
       it 'userが紐付いていないと保存できない' do
         @order_address.user_id = nil
         @order_address.valid?
