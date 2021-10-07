@@ -8,7 +8,6 @@ RSpec.describe OrderAddress, type: :model do
       @order_address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
     end
 
-  
     context '内容に問題がない場合' do
       it '全ての値が正しく入力されていれば保存される' do
         expect(@order_address).to be_valid
@@ -67,5 +66,5 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Item can't be blank")
       end
     end
-  end  
+  end
 end
