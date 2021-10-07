@@ -9,6 +9,7 @@ class OrderAddress
     validates :city, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters." }
     validates :house_number
     validates :telephone, numericality: true, format: {with: /\A0\d{9,10}\z/}
+    validates :token
   end
   validates :prefecture_id, numericality: {other_than: 1, message: "can't be blank"}
 
