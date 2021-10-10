@@ -38,6 +38,12 @@
 ### Association
 
 - belongs_to :user
+- belongs_to :category
+- belongs_to :sales_status
+- belongs_to :shipping_cost
+- belongs_to :prefecture
+- belongs_to :shipping_days
+- has_one_attached :image
 - has_one :order
 
 ## orders テーブル
@@ -51,6 +57,7 @@
 
 - belongs_to :user
 - belongs_to :item
+- has_one_attached :image
 - has_one :address
 
 ## addresses テーブル
@@ -68,5 +75,6 @@
 ### Association
 
 - belongs_to :order
+- belongs_to :prefecture
 
 
