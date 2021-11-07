@@ -28,6 +28,15 @@
   <div class='login-btn'>
     <%= f.submit "ログイン" ,class:"login-red-btn" %>
   </div>
+  <div class="p-signBase__or">
+    <span>or</span>
+  </div>
+  <div>
+    <%= link_to "Facebookでログイン", user_facebook_omniauth_authorize_path, method: :post%>
+  </div>
+  <div>
+    <%= link_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path, method: :post%>
+  </div>
 </div>
 <% end %>
 
