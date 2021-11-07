@@ -28,6 +28,13 @@
   <div class='login-btn'>
     <%= f.submit "ログイン" ,class:"login-red-btn" %>
   </div>
+  <div>
+    <span class="line">or</span>
+  </div>
+  <div class="api-btn">
+    <%= link_to "Facebookでログイン", user_facebook_omniauth_authorize_path, method: :post, class:"api-btn-fb" %>
+    <%= link_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path, method: :post, class:"api-btn-ggl" %>
+  </div>
 </div>
 <% end %>
 
