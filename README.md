@@ -3,7 +3,6 @@
 # テーブル設計
 
 ## users テーブル
-
 | Column                    | Type   | Option                    |
 | ------------------------- | ------ | ------------------------- |
 | nickname                  | string | null: false               |
@@ -15,15 +14,14 @@
 | first_name_kana           | string | null: false               |
 | birthday                  | date   | null: false               |
 
-
 ### Association
-
 - has_many :items
 - has_many :orders
+- has_many :sns_credentials
+
 
 ## items テーブル
- 
-| Column           | Type       | Option                         |
+ | Column           | Type       | Option                         |
 | ---------------- | ---------- | ------------------------------ |
 | item_name        | string     | null: false                    |
 | information      | text       | null: false                    |
@@ -36,7 +34,6 @@
 | user             | references | null: false, foreign_key: true |
 
 ### Association
-
 - belongs_to :user
 - belongs_to :category
 - belongs_to :sales_status
@@ -46,22 +43,21 @@
 - has_one_attached :image
 - has_one :order
 
-## orders テーブル
 
-| Column     | Type       | Option                         |
-| ---------- | ---------- | ------------------------------ |
-| user       | references | null: false, foreign_key: true | 
-| item       | references | null: false, foreign_key: true |
+## orders テーブル
+| Column | Type       | Option                         |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true | 
+| item   | references | null: false, foreign_key: true |
 
 ### Association
-
 - belongs_to :user
 - belongs_to :item
 - has_one_attached :image
 - has_one :address
 
-## addresses テーブル
 
+## addresses テーブル
 | Column        | Type       | Option                         |
 | ------------- | ---------- | ------------------------------ |
 | postal_code   | string     | null: false                    |
@@ -73,8 +69,18 @@
 | order         | references | null: false, foreign_key: true | 
 
 ### Association
-
 - belongs_to :order
 - belongs_to :prefecture
+
+
+## sns_credentials テーブル
+| Column   | Type       | Option                         |
+| -------- | ---------- | ------------------------------ |
+| provider | string     |                                |
+| uid      | string     |                                |
+| user     | references | null: false, foreign_key: true | 
+
+### Association
+- belongs_to :user
 
 
