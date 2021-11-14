@@ -12,3 +12,21 @@
   width: 185px;
   height: 49px;
 }
+
+/* スマホ表示時 */
+@media (max-width: 599px) {
+  .second-header {
+    width: 100%;
+    min-width: 300px;
+    height: 100px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .second-logo {
+    width: 185px;
+    height: 49px;
+  }
+}
