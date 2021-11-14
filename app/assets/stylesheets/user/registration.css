@@ -261,14 +261,14 @@
   width: 50%; 
   display: block; 
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 4px;
   text-decoration: none;
   background-color: #3B5998;
   box-shadow: 0 3px #39f;
   position: relative;
   top: -2px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   text-align: center;
   }
 
@@ -277,14 +277,14 @@
   width: 50%;
   display: block;
   color: #fff;  
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 4px;
   text-decoration: none;
   background-color: #DB4437;
   box-shadow: 0 3px #fcf;
   position: relative;
   top: -2px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   text-align: center;
   }
 
