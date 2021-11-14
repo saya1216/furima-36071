@@ -56,6 +56,7 @@
 
 .lists-left {
   display: flex;
+  align-items: flex-end;
   min-width: 200px;
 
 }
@@ -101,4 +102,46 @@
 .sign-up {
   text-decoration: none;
   color: #333333;
+}
+
+/* スマホ表示時 */
+@media (max-width: 599px) {
+  .top-page-header {
+    width: 100vw;
+    padding: 2vh 5vw;
+    display: flex;
+    flex-direction: column;
+  }
+    
+  .furima-icon {
+    width: 25vw;
+    margin-right: 5vw;
+  }
+ 
+  .search-button {
+    width: 5vh;
+    border: 0;
+    cursor: pointer;
+    background-color: #3ccace;
+    padding: 5px;
+  }
+  
+  .lists-left {
+    display: flex;
+    min-width: 200px;
+  
+  }
+  
+  .user-nickname {
+    text-decoration: none;
+    margin-right: 3vw;
+    color: #333333;
+    font-weight: bold;
+  }
+  
+  .sign-up {
+    text-decoration: none;
+    line-height: 32px;
+    color: #333333;
+  }
 }

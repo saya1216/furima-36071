@@ -211,7 +211,7 @@
   border-radius: 4px;
   text-decoration: none;
   background-color: #DB4437;
-  box-shadow: 0 3px #f63;
+  box-shadow: 0 3px #fcf;
   position: relative;
   top: -2px;
   padding: 10px 20px;
@@ -221,4 +221,71 @@
 .api-btn-ggl:hover {
   box-shadow: 0 1px #f63;
   top: 1px;
+}
+
+/* スマホ表示時 */
+@media (max-width: 599px) {
+
+  .registration-main {
+    width: 100%;
+    min-width: 300px;
+    height: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    
+  }
+
+/* form-wrapは商品購入画面でも使用しています */
+  .form-wrap {
+    width: 80%;
+    background-color: white;
+    padding-bottom: 70px;
+  }
+
+  .form-bottom-text {
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .register-info {
+    margin: 30px 90px 0 0;
+    color: #0099e8;
+    text-align: right;
+    cursor: pointer;
+  }
+
+  .api-btn-fb {
+  margin: 20px auto;
+  width: 50%; 
+  display: block; 
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  background-color: #3B5998;
+  box-shadow: 0 3px #39f;
+  position: relative;
+  top: -2px;
+  padding: 10px 10px;
+  text-align: center;
+  }
+
+  .api-btn-ggl {
+  margin: auto;
+  width: 50%;
+  display: block;
+  color: #fff;  
+  font-size: 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  background-color: #DB4437;
+  box-shadow: 0 3px #fcf;
+  position: relative;
+  top: -2px;
+  padding: 10px 10px;
+  text-align: center;
+  }
+
 }
