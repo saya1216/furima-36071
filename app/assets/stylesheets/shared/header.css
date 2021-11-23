@@ -78,16 +78,31 @@
   align-items: flex-end;
 }
 
-
 .user-nickname {
   text-decoration: none;
-  margin-right: 3vw;
+  margin-right: 1vw;
   color: #333333;
   font-weight: bold;
 }
 
+.show-lists {
+  position: absolute;
+  top: 90px;
+  right: 160px;
+  cursor: pointer;
+  height: 80px;
+  width: 100px;
+  text-align: left;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
 
-.logout {
+.after-login:hover {
+  background-color: #3ccace;
+  color: #fff;
+}
+
+.after-login {
   text-decoration: none;
   color: #333333;
 }
@@ -102,6 +117,10 @@
 .sign-up {
   text-decoration: none;
   color: #333333;
+}
+
+.hidden {
+  display: none;
 }
 
 /* スマホ表示時 */
