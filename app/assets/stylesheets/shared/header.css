@@ -78,33 +78,45 @@
   align-items: flex-end;
 }
 
-.user-nickname {
+.my-lists {
+  display: block;
+  float: left;
+  margin-left: 30px;
+  width: 160px;
+  height: 28px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.my-lists:hover .show-lists{
+  display: block;
+  color: #3ccace; 
+}
+
+.after-login {
   text-decoration: none;
-  margin-right: 1vw;
-  color: #333333;
-  font-weight: bold;
+  color: #333333; 
+}
+
+.after-login:hover {
+  color: #3ccace;
+  display: block;
 }
 
 .show-lists {
   position: absolute;
-  top: 90px;
-  right: 160px;
+  top: 60px;
+  right: 60px;
+  z-index: 1;
   cursor: pointer;
   height: 80px;
   width: 100px;
   text-align: left;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   background-color: #fff;
-}
-
-.after-login:hover {
-  background-color: #3ccace;
-  color: #fff;
-}
-
-.after-login {
-  text-decoration: none;
-  color: #333333;
+  display: none;
+  border-left: 1px solid #d8d8d8;
+  border-right: 1px solid #d8d8d8;
 }
 
 .login {
@@ -117,10 +129,6 @@
 .sign-up {
   text-decoration: none;
   color: #333333;
-}
-
-.hidden {
-  display: none;
 }
 
 /* スマホ表示時 */
