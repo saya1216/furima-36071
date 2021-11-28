@@ -68,7 +68,7 @@ RSpec.describe "ユーザー新規登録", type: :system do
         find('input[name="commit"]').click
       }.to change { User.count }.by(0)
       # 新規登録ページへ戻されることを確認する
-      expect(current_path).to eq user_registration_path
+      expect(current_path).to eq(user_registration_path)
     end
   end
 end
