@@ -128,7 +128,7 @@ RSpec.describe '商品情報編集', type: :system do
       # 商品詳細ページに戻ったことを確認する
       expect(current_path).to eq(item_path(@item1))
       # トップページには先ほど変更した内容の商品が存在することを確認する（画像）
-      expect(page).to have_selector("img")
+      expect(page).to have_selector('img')
       # トップページには先ほど変更した内容の商品が存在することを確認する（商品名）
       expect(page).to have_content(@item1.item_name)
       # トップページには先ほど変更した内容の商品が存在することを確認する（値段）
@@ -143,7 +143,7 @@ RSpec.describe '商品情報編集', type: :system do
       # 商品2をクリックして詳細ページに遷移する
       visit item_path(@item2)
       # 詳細ページに「編集」へのリンクがないことを確認する
-      expect(page).to have_no_link '商品の編集'
+      expect(page).to have_no_link '商品の編集', href: edit_item_path(@item2)
     end
     it 'ログインしていないと商品の編集画面には遷移できない' do
       # トップページに移動する
@@ -151,11 +151,62 @@ RSpec.describe '商品情報編集', type: :system do
       # 商品1の詳細ページに遷移する
       visit item_path(@item1)
       # 商品1の詳細ページに「編集」へのリンクがないことを確認する
-      expect(page).to have_no_link '商品の編集'
+      expect(page).to have_no_link '商品の編集', href: edit_item_path(@item1)
       # 商品2の詳細ページに遷移する
       visit item_path(@item2)
       # 商品2の詳細ページに「編集」へのリンクがないことを確認する
-      expect(page).to have_no_link '商品の編集'
+      expect(page).to have_no_link '商品の編集', href: edit_item_path(@item2)
+    end
+  end
+end
+
+RSpec.describe '商品削除', type: :system do
+  before do
+    @item1 = FactoryBot.create(:item)
+    @item2 = FactoryBot.create(:item)
+  end
+  context '商品削除ができるとき' do
+    it 'ログインしたユーザーは自らが出品した商品の削除ができる' do
+      # 商品1を出品したユーザーでログインする
+      sign_in(@item1.user)
+      # 商品1の商品詳細ページに遷移する
+      visit item_path(@item1)
+      # 商品1に「削除」へのリンクがあることを確認する
+      expect(page).to have_link('削除'), href: item_path(@item1)
+      # 商品を削除するとレコードの数が1減ることを確認する
+      expect{
+        find_link('削除', href: item_path(@item1)).click
+      }.to change { Item.count }.by(-1)
+      # トップページに戻ることを確認する
+      expect(current_path).to eq(root_path)
+      # トップページには商品1の内容が存在しないことを確認する（画像）
+      expect(page).to have_selector('img')
+      # トップページには商品1の内容が存在しないことを確認する（商品名）
+      expect(page).to have_no_content(@item1.item_name)
+      # トップページには商品1の内容が存在しないことを確認する（値段）
+      expect(page).to have_no_content(@item1.price)
+    end
+  end
+  context 'ツイート削除ができないとき' do
+    it 'ログインしたユーザーは自分以外が出品した商品の削除ができない' do
+      # 商品1を投稿したユーザーでログインする
+      sign_in(@item1.user)
+      # 商品2の商品詳細ページに遷移する
+      visit item_path(@item2)
+      # 商品2に「削除」へのリンクがないことを確認する
+      expect(page).to have_no_link '削除', href: item_path(@item2)
+    end
+    it 'ログインしていないと商品の削除ボタンがない' do
+      # トップページに移動する
+      visit root_path
+      # 商品1の商品詳細ページに遷移する
+      visit item_path(@item1)
+      # 商品1に「削除」へのリンクがないことを確認する
+      expect(page).to have_no_link '削除', href: item_path(@item1)
+      # 商品2の商品詳細ページに遷移する
+      visit item_path(@item2)
+      # 商品2に「削除」へのリンクがないことを確認する
+      expect(page).to have_no_link '削除', href: item_path(@item2)
     end
   end
 end
