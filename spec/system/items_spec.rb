@@ -120,7 +120,7 @@ RSpec.describe '商品情報編集', type: :system do
       select('送料込み', from: 'item-shipping-fee-status')
       select('茨城県', from: 'item-prefecture')
       select('4~7日で発送', from: 'item-scheduled-delivery')
-      fill_in 'item-price', with: "1000"
+      fill_in 'item-price', with: "9999999"
       # 編集してもItemモデルのカウントは変わらないことを確認する
       expect {
         find('input[name="commit"]').click
@@ -132,7 +132,7 @@ RSpec.describe '商品情報編集', type: :system do
       # トップページには先ほど変更した内容の商品が存在することを確認する（商品名）
       expect(page).to have_content(@item1.item_name)
       # トップページには先ほど変更した内容の商品が存在することを確認する（値段）
-      expect(page).to have_content(1000)
+      expect(page).to have_content(9999999)
     end
   end
 
