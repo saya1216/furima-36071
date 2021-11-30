@@ -96,6 +96,7 @@ RSpec.describe '商品情報編集', type: :system do
       # 編集ページへ遷移する
       visit edit_item_path(@item1)
       # すでに登録済みの内容がフォームに入っていることを確認する
+      expect(page).to have_selector('img')
       expect(
         find('#item-name').value
       ).to eq @item1.item_name
@@ -208,5 +209,52 @@ RSpec.describe '商品削除', type: :system do
       # 商品2に「削除」へのリンクがないことを確認する
       expect(page).to have_no_link '削除', href: item_path(@item2)
     end
+  end
+end
+
+RSpec.describe '商品詳細', type: :system do
+  before do
+    @item = FactoryBot.create(:item)
+  end
+  it 'ログインしたユーザーは商品詳細ページに遷移して「商品の編集」と「削除」が表示される' do
+    # ログインする
+    sign_in(@item.user)
+    # 詳細ページに遷移する
+    visit item_path(@item)
+    # 詳細ページに商品の内容が含まれている
+    expect(page).to have_selector('img')
+    find('.name').set(@item.item_name)
+    find('.item-explain-box').set(@item.information)
+    (all(".detail-item")[0]).set(@item.user.nickname)
+    expect(page).to have_content("#{@item.category.name}")
+    expect(page).to have_content("#{@item.sales_status.name}")
+    expect(page).to have_content("#{@item.shipping_cost.name}")
+    expect(page).to have_content("#{@item.prefecture.name}")
+    expect(page).to have_content("#{@item.shipping_days.name}")
+    find('.item-price').set(@item.price)
+    # 詳細ページに「商品の編集」と「削除」へのリンクが表示されている
+    expect(page).to have_content('商品の編集'), href: edit_item_path(@item)
+    expect(page).to have_content('削除'), href: item_path(@item)
+
+  end
+  it 'ログインしていない状態で商品詳細ページに遷移できるものの「商品の編集」と「削除」が表示されない' do
+    # トップページに移動する
+    visit root_path
+    # 詳細ページに遷移する
+    visit item_path(@item)
+    # 詳細ページに商品の内容が含まれている
+    expect(page).to have_selector('img')
+    find('.name').set(@item.item_name)
+    find('.item-explain-box').set(@item.information)
+    (all(".detail-item")[0]).set(@item.user.nickname)
+    expect(page).to have_content("#{@item.category.name}")
+    expect(page).to have_content("#{@item.sales_status.name}")
+    expect(page).to have_content("#{@item.shipping_cost.name}")
+    expect(page).to have_content("#{@item.prefecture.name}")
+    expect(page).to have_content("#{@item.shipping_days.name}")
+    find('.item-price').set(@item.price)
+    # 詳細ページに「商品の編集」と「削除」が表示されない
+    expect(page).to have_no_content('商品の編集')
+    expect(page).to have_no_content('削除')
   end
 end
