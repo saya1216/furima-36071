@@ -223,9 +223,9 @@ RSpec.describe '商品詳細', type: :system do
     visit item_path(@item)
     # 詳細ページに商品の内容が含まれている
     expect(page).to have_selector('img')
-    find('.name').set(@item.item_name)
-    find('.item-explain-box').set(@item.information)
-    (all(".detail-item")[0]).set(@item.user.nickname)
+    expect(page).to have_content("#{@item.item_name}")
+    expect(page).to have_content("#{@item.information}")
+    expect(page).to have_content("#{@item.user.nickname}")
     expect(page).to have_content("#{@item.category.name}")
     expect(page).to have_content("#{@item.sales_status.name}")
     expect(page).to have_content("#{@item.shipping_cost.name}")
