@@ -18,6 +18,6 @@ class Item < ApplicationRecord
   belongs_to :sales_status
   belongs_to :shipping_cost
   belongs_to :shipping_days
-  has_one_attached :image
+  has_one_attached :image, dependent: :destroy
   has_one :order
 end
