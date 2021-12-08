@@ -106,7 +106,7 @@
 .show-lists {
   position: absolute;
   top: 60px;
-  right: 60px;
+  right: 120px;
   z-index: 1;
   cursor: pointer;
   height: 80px;
