@@ -188,7 +188,7 @@ RSpec.describe '商品削除', type: :system do
       expect(page).to have_no_content(@item1.price)
     end
   end
-  context 'ツイート削除ができないとき' do
+  context '商品削除ができないとき' do
     it 'ログインしたユーザーは自分以外が出品した商品の削除ができない' do
       # 商品1を投稿したユーザーでログインする
       sign_in(@item1.user)

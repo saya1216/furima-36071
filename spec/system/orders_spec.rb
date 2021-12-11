@@ -18,7 +18,7 @@ RSpec.describe "商品購入", type: :system do
       visit item_path(@item1)
       # 商品の詳細ページに「購入画面に進む」へのリンクがあることを確認する
       expect(page).to have_link('購入画面に進む'), href: item_orders_path(@item1)
-      # 商品1に購入画面に遷移する
+      # 商品1の購入画面に遷移する
       visit item_orders_path(@item1)
       # 商品の「画像・名前・配送料の負担・値段」が画面に表示されている
       expect(page).to have_selector('img')
