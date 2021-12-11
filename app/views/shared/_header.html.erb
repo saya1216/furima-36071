@@ -20,7 +20,7 @@
           <ul class="show-lists">
             <li><%= link_to 'マイページ', "#", class: "after-login", method: :get %></li>
             <li><%= link_to 'ログアウト', destroy_user_session_path, class: "after-login", method: :delete %></li>
-            <li><%= link_to '退会', user_path(current_user.id), class: "after-login", method: :delete, "data-confirm" => "本当に退会しますか？" %></li>
+            <li><%= link_to '退会', user_path(current_user.id), class: "after-login", method: :delete, data: { confirm: "本当に退会しますか？"} %></li>
           </ul>
         </span>    
       <% else %>
