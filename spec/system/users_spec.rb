@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe "ユーザー新規登録", type: :system do
+RSpec.describe 'ユーザー新規登録', type: :system do
   before do
     @user = FactoryBot.build(:user)
   end
-  context 'ユーザー新規登録ができるとき' do 
+  context 'ユーザー新規登録ができるとき' do
     it '正しい情報を入力すればユーザー新規登録ができてトップページに移動する' do
       # トップページに移動する
       visit root_path
@@ -21,13 +21,13 @@ RSpec.describe "ユーザー新規登録", type: :system do
       fill_in 'first-name', with: @user.first_name
       fill_in 'last-name-kana', with: @user.last_name_kana
       fill_in 'first-name-kana', with: @user.first_name_kana
-      find("#user_birthday_1i").find("option[value='1930']").select_option
-      find("#user_birthday_2i").find("option[value='1']").select_option
-      find("#user_birthday_3i").find("option[value='1']").select_option
+      find('#user_birthday_1i').find("option[value='1930']").select_option
+      find('#user_birthday_2i').find("option[value='1']").select_option
+      find('#user_birthday_3i').find("option[value='1']").select_option
       # サインアップボタンを押すとユーザーモデルのカウントが1上がることを確認する
-      expect{
+      expect do
         find('input[name="commit"]').click
-      }.to change { User.count }.by(1)
+      end.to change { User.count }.by(1)
       # トップページへ遷移したことを確認する
       expect(current_path).to eq(root_path)
       # ニックネームにカーソルを合わせるとログアウトボタンが表示されることを確認する
@@ -60,13 +60,13 @@ RSpec.describe "ユーザー新規登録", type: :system do
       fill_in 'first-name', with: ''
       fill_in 'last-name-kana', with: ''
       fill_in 'first-name-kana', with: ''
-      find("#user_birthday_1i").find("option[value='']").select_option
-      find("#user_birthday_2i").find("option[value='']").select_option
-      find("#user_birthday_3i").find("option[value='']").select_option
+      find('#user_birthday_1i').find("option[value='']").select_option
+      find('#user_birthday_2i').find("option[value='']").select_option
+      find('#user_birthday_3i').find("option[value='']").select_option
       # 新規登録ボタンを押してもユーザーモデルのカウントは上がらないことを確認する
-      expect{
+      expect do
         find('input[name="commit"]').click
-      }.to change { User.count }.by(0)
+      end.to change { User.count }.by(0)
       # 新規登録ページへ戻されることを確認する
       expect(current_path).to eq(user_registration_path)
     end
@@ -113,7 +113,7 @@ RSpec.describe 'ログイン', type: :system do
       fill_in 'email', with: ''
       fill_in 'password', with: ''
       # ログインボタンを押す
-      find('input[name="commit"]').click      
+      find('input[name="commit"]').click
       # ログインページへ戻されることを確認する
       expect(current_path).to eq(new_user_session_path)
     end
@@ -132,7 +132,7 @@ RSpec.describe 'ログアウト', type: :system do
       expect(
         find('.lists-right').find('.my-lists').hover
       ).to have_content('ログアウト')
-      #「ログアウト」をクリックするとログアウトする
+      # 「ログアウト」をクリックするとログアウトする
       click_on('ログアウト')
       # トップページへ遷移することを確認する
       expect(current_path).to eq(root_path)
@@ -169,10 +169,10 @@ RSpec.describe '退会', type: :system do
       fill_in 'addresses', with: '青山1-1-1'
       fill_in 'phone-number', with: '09012345678'
       # 送信するとOrderモデルのカウントが１上がることを確認する
-      expect {
+      expect do
         find('input[name="commit"]').click
         sleep 1.5
-      }.to change { Order.count }.by(1)
+      end.to change { Order.count }.by(1)
       # トップページに遷移したことを確認する
       expect(current_path).to eq(root_path)
       # 購入した商品1に「Sold Out!!」の文字があることを確認する
@@ -181,13 +181,15 @@ RSpec.describe '退会', type: :system do
       expect(
         find('.lists-right').find('.my-lists').hover
       ).to have_content('退会')
-      # 退会ボタンを押す 
+      # 退会ボタンを押す
       click_on('退会')
       # confirmのOKボタンをクリックすると退会できる
       expect do
-        expect(page.accept_confirm).to eq "本当に退会しますか？"
-        expect(page).to have_content "ありがとうございました。またのご利用を心よりお待ちしております。"
-      end.to change{ User.count }.by(-1).and change { Item.count }.by(-1).and change { Order.count }.by(-1).and change { Address.count }.by(-1)
+        expect(page.accept_confirm).to eq '本当に退会しますか？'
+        expect(page).to have_content 'ありがとうございました。またのご利用を心よりお待ちしております。'
+      end.to change { User.count }.by(-1).and change { Item.count }.by(-1).and change { Order.count }.by(-1).and change {
+                                                                                                                   Address.count
+                                                                                                                 }.by(-1)
       # トップページの商品一覧に出品した商品が無いことを確認する
       expect(page).to have_no_content('@item2')
       # 購入した商品の画像が無いことを確認する
@@ -195,4 +197,3 @@ RSpec.describe '退会', type: :system do
     end
   end
 end
-      

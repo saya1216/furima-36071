@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "商品購入", type: :system do
+RSpec.describe '商品購入', type: :system do
   before do
     @user1 = FactoryBot.create(:user)
     @user2 = FactoryBot.create(:user)
@@ -10,7 +10,7 @@ RSpec.describe "商品購入", type: :system do
     @item2 = FactoryBot.create(:item)
   end
 
-  context '商品の購入ができるとき'do
+  context '商品の購入ができるとき' do
     it 'ログインしたユーザーは自分以外が出品した商品の購入ができる', js: true do
       # ユーザー1でログインする
       sign_in(@user1)
@@ -22,9 +22,9 @@ RSpec.describe "商品購入", type: :system do
       visit item_orders_path(@item1)
       # 商品の「画像・名前・配送料の負担・値段」が画面に表示されている
       expect(page).to have_selector('img')
-      expect(page).to have_content("#{@item1.item_name}")
-      expect(page).to have_content("#{@item1.shipping_cost.name}")
-      expect(page).to have_content("#{@item1.price}")
+      expect(page).to have_content(@item1.item_name.to_s)
+      expect(page).to have_content(@item1.shipping_cost.name.to_s)
+      expect(page).to have_content(@item1.price.to_s)
       # フォームに情報を入力する
       fill_in 'card-number', with: '4242424242424242'
       fill_in 'card-exp-month', with: '12'
@@ -36,10 +36,10 @@ RSpec.describe "商品購入", type: :system do
       fill_in 'addresses', with: '青山1-1-1'
       fill_in 'phone-number', with: '09012345678'
       # 送信するとOrderモデルのカウントが１上がることを確認する
-      expect {
+      expect do
         find('input[name="commit"]').click
         sleep 1.5
-      }.to change { Order.count }.by(1)
+      end.to change { Order.count }.by(1)
       # トップページに戻っていることを確認する
       expect(current_path).to eq(root_path)
       # 購入した商品1に「Sold Out!!」の文字があることを確認する
@@ -59,9 +59,8 @@ RSpec.describe "商品購入", type: :system do
       # 購入ボタンが無いことを確認する
       expect(page).to have_no_content('購入画面に進む')
     end
-    
   end
-  context '商品の購入ができないとき'do
+  context '商品の購入ができないとき' do
     it 'ログインしたユーザーは自分が出品した商品の購入はできない' do
       # 商品1を投稿したユーザーでログインする
       sign_in(@item1.user)
@@ -83,5 +82,4 @@ RSpec.describe "商品購入", type: :system do
       expect(page).to have_no_link('購入画面に進む'), href: item_orders_path(@item2)
     end
   end
-
 end

@@ -1,12 +1,12 @@
 module FacebookOauthMockHelper
   def facebook_oauth_mock
-# テスト用にモックを使うための設定
-# '/auth/provider'へのリクエストが、即座に'/auth/provider/callback'にリダイレクトされる
+    # テスト用にモックを使うための設定
+    # '/auth/provider'へのリクエストが、即座に'/auth/provider/callback'にリダイレクトされる
     OmniAuth.config.test_mode = true
 
-# facebook用のモック
-# '/auth/provider/callback'にリダイレクトされた時に渡されるデータを生成
-    OmniAuth.config.mock_auth[:facebook]=
+    # facebook用のモック
+    # '/auth/provider/callback'にリダイレクトされた時に渡されるデータを生成
+    OmniAuth.config.mock_auth[:facebook] =
       OmniAuth::AuthHash.new(
         provider: 'facebook',
         uid: '1234567',
@@ -17,7 +17,7 @@ module FacebookOauthMockHelper
         },
         credentials: {
           token: 'ABCDEF...',
-          expires_at: 1321747205,
+          expires_at: 1_321_747_205,
           expires: true
         },
         extra: {
@@ -29,4 +29,4 @@ module FacebookOauthMockHelper
         }
       )
   end
-end  
+end

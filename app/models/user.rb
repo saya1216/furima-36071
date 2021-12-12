@@ -16,14 +16,14 @@ class User < ApplicationRecord
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
 
   has_many :items, dependent: :destroy
-  has_many :orders, dependent: :destroy 
+  has_many :orders, dependent: :destroy
   has_many :sns_credentials, dependent: :destroy
 
   def self.from_omniauth(auth)
     sns = SnsCredential.where(provider: auth.provider, uid: auth.uid).first_or_create
     user = User.where(email: auth.info.email).first_or_initialize(
       nickname: auth.info.name,
-        email: auth.info.email
+      email: auth.info.email
     )
     if user.persisted?
       sns.user = user
