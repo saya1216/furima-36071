@@ -1,5 +1,11 @@
 require 'rails_helper'
 
+def basic_pass(path)
+  username = ENV["BASIC_AUTH_USER"]
+  password = ENV["BASIC_AUTH_PASSWORD"]
+  visit "http://#{username}:#{password}@#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}#{path}"
+end
+
 RSpec.describe '商品購入', type: :system do
   before do
     @user1 = FactoryBot.create(:user)
@@ -12,6 +18,8 @@ RSpec.describe '商品購入', type: :system do
 
   context '商品の購入ができるとき' do
     it 'ログインしたユーザーは自分以外が出品した商品の購入ができる', js: true do
+      # basic_passのメソッドを実行
+      basic_pass root_path
       # ユーザー1でログインする
       sign_in(@user1)
       # 商品1の詳細画面に遷移する

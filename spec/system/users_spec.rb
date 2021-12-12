@@ -1,11 +1,19 @@
 require 'rails_helper'
 
+def basic_pass(path)
+  username = ENV["BASIC_AUTH_USER"]
+  password = ENV["BASIC_AUTH_PASSWORD"]
+  visit "http://#{username}:#{password}@#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}#{path}"
+end
+
 RSpec.describe 'ユーザー新規登録', type: :system do
   before do
     @user = FactoryBot.build(:user)
   end
   context 'ユーザー新規登録ができるとき' do
     it '正しい情報を入力すればユーザー新規登録ができてトップページに移動する' do
+      # basic_passのメソッドを実行
+      basic_pass root_path
       # トップページに移動する
       visit root_path
       # トップページにサインアップページへ遷移するボタンがあることを確認する

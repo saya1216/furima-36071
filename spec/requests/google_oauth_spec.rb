@@ -10,7 +10,9 @@ RSpec.describe 'GoogleOauth', type: :request do
       Rails.application.env_config['omniauth.auth'] = google_oauth_mock
     end
     it 'APIにリクエストを送信すると正常にレスポンスが返ってくる' do
-      post '/users/auth/google_oauth2/callback'
+      username = ENV['BASIC_AUTH_USER']
+      password = ENV['BASIC_AUTH_PASSWORD']
+      post '/users/auth/google_oauth2/callback', headers: { 'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials(username, password) }
       expect(response.status).to eq(200)
     end
   end

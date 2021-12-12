@@ -10,7 +10,9 @@ RSpec.describe 'FacebookOauth', type: :request do
       Rails.application.env_config['omniauth.auth'] = facebook_oauth_mock
     end
     it 'APIにリクエストを送信すると正常にレスポンスが返ってくる' do
-      post '/users/auth/facebook/callback'
+      username = ENV['BASIC_AUTH_USER']
+      password = ENV['BASIC_AUTH_PASSWORD']
+      post '/users/auth/facebook/callback', headers: { 'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials(username, password) }
       expect(response.status).to eq(200)
     end
   end

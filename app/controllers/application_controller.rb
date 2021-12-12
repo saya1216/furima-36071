@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # ↓ ActionController::InvalidAuthenticityTokenエラー対策
   protect_from_forgery prepend: true, with: :null_session
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :basic_auth if Rails.env.production? # テスト時はbasic認証を行わないように分岐
+  before_action :basic_auth
 
   private
 

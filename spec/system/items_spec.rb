@@ -1,5 +1,11 @@
 require 'rails_helper'
 
+def basic_pass(path)
+  username = ENV["BASIC_AUTH_USER"]
+  password = ENV["BASIC_AUTH_PASSWORD"]
+  visit "http://#{username}:#{password}@#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}#{path}"
+end
+
 RSpec.describe '商品出品', type: :system do
   before do
     @user = FactoryBot.create(:user)
@@ -8,6 +14,8 @@ RSpec.describe '商品出品', type: :system do
 
   context '商品の出品ができたとき' do
     it '商品が出品できると、出品一覧に遷移して、出品した商品が表示されている' do
+      # basic_passのメソッドを実行
+      basic_pass root_path
       # ログインする
       sign_in(@user)
       # 商品出品ページへのボタンがあることを確認する
