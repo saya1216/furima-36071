@@ -25,7 +25,7 @@ RSpec.describe 'Items', type: :request do
       username = ENV['BASIC_AUTH_USER']
       password = ENV['BASIC_AUTH_PASSWORD']
       get root_path, headers: { 'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials(username, password) }
-      expect(response.body).to include('test_image.png')
+      expect(response.body).to include('test_image.jpg')
     end
     it 'indexアクションにリクエストするとレスポンスに出品ページへのリンクが存在する' do
       username = ENV['BASIC_AUTH_USER']
@@ -65,7 +65,7 @@ RSpec.describe 'Items', type: :request do
       username = ENV['BASIC_AUTH_USER']
       password = ENV['BASIC_AUTH_PASSWORD']
       get root_path, headers: { 'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials(username, password) }
-      expect(response.body).to include('test_image.png')
+      expect(response.body).to include('test_image.jpg')
     end
   end
 end

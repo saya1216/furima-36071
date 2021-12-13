@@ -195,9 +195,7 @@ RSpec.describe '退会', type: :system do
       expect do
         expect(page.accept_confirm).to eq '本当に退会しますか？'
         expect(page).to have_content 'ありがとうございました。またのご利用を心よりお待ちしております。'
-      end.to change { User.count }.by(-1).and change { Item.count }.by(-1).and change { Order.count }.by(-1).and change {
-                                                                                                                   Address.count
-                                                                                                                 }.by(-1)
+      end.to change { User.count }.by(-1).and change { Item.count }.by(-1).and change { Order.count }.by(-1).and change { Address.count }.by(-1)
       # トップページの商品一覧に出品した商品が無いことを確認する
       expect(page).to have_no_content('@item2')
       # 購入した商品の画像が無いことを確認する

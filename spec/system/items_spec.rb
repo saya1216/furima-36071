@@ -23,7 +23,7 @@ RSpec.describe '商品出品', type: :system do
       # 出品ページに移動する
       click_on('出品する')
       # 添付する画像を定義する
-      image_path = Rails.root.join('public/images/test_image.png')
+      image_path = Rails.root.join('public/images/test_image.jpg')
       # 画像選択フォームに画像を添付する
       attach_file('item[image]', image_path)
       # 商品情報を入力する
@@ -181,9 +181,12 @@ RSpec.describe '商品削除', type: :system do
       visit item_path(@item1)
       # 商品1に「削除」へのリンクがあることを確認する
       expect(page).to have_link('削除'), href: item_path(@item1)
-      # 商品を削除するとレコードの数が1減ることを確認する
+      # 削除ボタンを押す
+      click_on('削除')
+      # confirmのOKボタンをクリックすると削除される
       expect do
-        find_link('削除', href: item_path(@item1)).click
+        expect(page.accept_confirm).to eq '本当に削除しますか？'
+        sleep 1
       end.to change { Item.count }.by(-1)
       # トップページに戻ることを確認する
       expect(current_path).to eq(root_path)
