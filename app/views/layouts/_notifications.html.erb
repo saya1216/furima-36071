@@ -3,3 +3,9 @@
     <%= flash[:success] %>
   </div>
 <% end %>
+
+<% if flash[:delete] %>
+  <div class="flash-del">
+    <%= flash[:delete] %>
+  </div>
+<% end %>

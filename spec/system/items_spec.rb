@@ -186,7 +186,7 @@ RSpec.describe '商品削除', type: :system do
       # confirmのOKボタンをクリックすると削除される
       expect do
         expect(page.accept_confirm).to eq '本当に削除しますか？'
-        sleep 1
+        expect(page).to have_content '商品を削除しました。'
       end.to change { Item.count }.by(-1)
       # トップページに戻ることを確認する
       expect(current_path).to eq(root_path)
